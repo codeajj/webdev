@@ -1,7 +1,7 @@
 let userArray = []
 let nextId = 1
 
-const getall = () => {
+const getAll = () => {
     return userArray
 }
 
