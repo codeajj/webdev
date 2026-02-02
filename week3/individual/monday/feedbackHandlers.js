@@ -1,23 +1,61 @@
+
 const Feedback = require("./feedbackLib");
 
 const getAllFeedbacks = (req, res) => {
-    res.json({ message: "Hello from getAllFeedbacks" });
+  const feedbacks = Feedback.getAll();
+  res.json(feedbacks);
 };
 
 const createFeedback = (req, res) => {
-    res.json({ message: "Hello from createFeedback" });
+  const { sender, message, rating, platform } = req.body;
+
+  if (!sender || !message || rating === undefined || !platform) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  const newFeedback = Feedback.addOne(
+    sender,
+    message,
+    rating,
+    platform
+  );
+
+  res.status(201).json(newFeedback);
 };
 
 const getFeedbackById = (req, res) => {
-    res.json({ message: "Hello from getFeedbackById" });
+  const feedback = Feedback.findById(req.params.feedbackId);
+
+  if (!feedback) {
+    return res.status(404).json({ error: "Feedback not found" });
+  }
+
+  res.json(feedback);
 };
 
 const updateFeedback = (req, res) => {
-    res.json({ message: "Hello from updateFeedback" });
+  const updatedFeedback = Feedback.updateOne(
+    req.params.feedbackId,
+    req.body
+  );
+
+  if (!updatedFeedback) {
+    return res.status(404).json({ error: "Feedback not found" });
+  }
+
+  res.json(updatedFeedback);
 };
 
 const deleteFeedback = (req, res) => {
-    res.json({ message: "Hello from deleteFeedback" });
+  const deletedFeedback = Feedback.deleteOne(
+    req.params.feedbackId
+  );
+
+  if (!deletedFeedback) {
+    return res.status(404).json({ error: "Feedback not found" });
+  }
+
+  res.json(deletedFeedback);
 };
 
 module.exports = {
