@@ -55,4 +55,10 @@ const updateUser = (req, res) => {
    res.json(updatedUser);
 };
 
-module.exports = { getAllUsers };
+module.exports = {
+  getAllUsers,
+  createUser,
+  getUserById,
+  updateUser,
+  deleteUser,
+};
