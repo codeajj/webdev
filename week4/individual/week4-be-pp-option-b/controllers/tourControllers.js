@@ -1,4 +1,11 @@
 const Tour = require("../models/tourModel.js");
+const User = require('../models/userModel');
+
+
+const getAllUsers = (req, res) => {
+   res.json(User.getAll());
+};
+
 
 const getAllTours = (req, res) => {
   res.json(Tour.getAll());
@@ -53,3 +60,5 @@ module.exports = {
   updateTour,
   deleteTour,
 };
+
+module.exports = { getAllUsers };
