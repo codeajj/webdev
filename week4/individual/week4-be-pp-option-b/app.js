@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
 
-// Middleware to parse JSON
-app.use(express.json());
-
 const tourRouter = require("./routes/tourRouter");
 const userRouter = require("./routes/userRouter");
+
+// Middleware to parse JSON
+app.use(express.json());
 
 // ROUTES
 app.use("/tours", tourRouter);

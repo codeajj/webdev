@@ -1,59 +1,58 @@
-const User = require('../models/userModel');
-
+const User = require("../models/userModel");
 
 const getAllUsers = (req, res) => {
-   res.json(User.getAll());
-}
+  res.json(User.getAll());
+};
 
 const createUser = (req, res) => {
-   const {
-      name,
-      email,
-      password,
-      phone_number,
-      gender,
-      date_of_birth,
-      membership_status,
-   } = req.body;
+  const {
+    name,
+    email,
+    password,
+    phone_number,
+    gender,
+    date_of_birth,
+    membership_status,
+  } = req.body;
 
-   const newUser = User.addOne(
-      name,
-      email,
-      password,
-      phone_number,
-      gender,
-      date_of_birth,
-      membership_status
-   )
+  const newUser = User.addOne(
+    name,
+    email,
+    password,
+    phone_number,
+    gender,
+    date_of_birth,
+    membership_status
+  );
 
-   if (!newUser) {
-      return res.status(500).json({ message: 'Fail to create user' });
-   }
+  if (!newUser) {
+    return res.status(500).json({ message: "Fail to create user" });
+  }
 
-   res.json(newUser)
-}
+  res.json(newUser);
+};
 
 const getUserById = (req, res) => {
-   const { userId } = req.params;
-   const user = User.findById(userId);
+  const { userId } = req.params;
+  const user = User.findById(userId);
 
-   if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-   }
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
 
-   res.json(user);
-}
+  res.json(user);
+};
 
 const updateUser = (req, res) => {
-   const { userId } = req.params;
-   const updatedUser = User.updateOneById(userId, req.body);
+  const { userId } = req.params;
+  const updatedUser = User.updateOneById(userId, req.body);
 
-   if (!updatedUser) {
-      return res.status(404).json({ message: 'User not found' });
-   }
+  if (!updatedUser) {
+    return res.status(404).json({ message: "User not found" });
+  }
 
-   res.json(updatedUser);
-}
+  res.json(updatedUser);
+};
 
 const deleteUser = (req, res) => {
   const { userId } = req.params;
@@ -64,13 +63,12 @@ const deleteUser = (req, res) => {
   }
 
   res.json({ message: "Deleted successfully" });
-}
-
+};
 
 module.exports = {
   getAllUsers,
   createUser,
   getUserById,
   updateUser,
-  deleteUser
-}
+  deleteUser,
+};

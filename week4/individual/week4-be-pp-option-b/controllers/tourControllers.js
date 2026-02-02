@@ -1,56 +1,51 @@
-const Tour = require("../models/tourModel.js");
-const User = require('../models/userModel');
-
-
-const getAllUsers = (req, res) => {
-   res.json(User.getAll());
-};
-
+const Tour = require("../models/tourModel");
 
 const getAllTours = (req, res) => {
   res.json(Tour.getAll());
 };
- 
+
 const createTour = (req, res) => {
   const { name, info, image, price } = req.body;
+
   const newTour = Tour.addOne(name, info, image, price);
-  if (newTour) {
-    res.status(201).json(newTour)
-  } else {
-    res.status(500).json({ message: "Fail to create tour" });
+  if (!newTour) {
+    return res.status(500).json({ message: "Fail to create tour" });
   }
+
+  return res.status(201).json(newTour);
 };
 
-
 const getTourById = (req, res) => {
-  const tourId = req.params.tourId;
+  const { tourId } = req.params;
   const tour = Tour.findById(tourId);
-  if (tour) {
-    res.json(tour);
-  } else {
-    res.status(404).json({ message: "Tour not found" });
+
+  if (!tour) {
+    return res.status(404).json({ message: "Tour not found" });
   }
+
+  res.json(tour);
 };
 
 const updateTour = (req, res) => {
-  const tourId = req.params.tourId;
-  const updatedData = req.body;
-  const updatedTour = Tour.updateOneById(tourId, updatedData);
-  if (updatedTour) {
-    res.json(updatedTour);
-  } else {
-    res.status(404).json({ message: "Tour not found" });
+  const { tourId } = req.params;
+  const updatedTour = Tour.updateOneById(tourId, req.body);
+
+  if (!updatedTour) {
+    return res.status(404).json({ message: "Tour not found" });
   }
+
+  res.json(updatedTour);
 };
 
 const deleteTour = (req, res) => {
-  const tourId = req.params.tourId;
+  const { tourId } = req.params;
   const isDeleted = Tour.deleteOneById(tourId);
-  if (isDeleted) {
-    res.status(204).send()
-  } else {
-    res.status(404).json({ message: "Tour not found" });
+
+  if (!isDeleted) {
+    return res.status(404).json({ message: "Tour not found" });
   }
+
+  return res.status(204).send();
 };
 
 module.exports = {
@@ -60,5 +55,3 @@ module.exports = {
   updateTour,
   deleteTour,
 };
-
-module.exports = { getAllUsers };
