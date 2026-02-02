@@ -55,6 +55,18 @@ const updateUser = (req, res) => {
    res.json(updatedUser);
 };
 
+const deleteUser = (req, res) => {
+  const { userId } = req.params;
+  const isDeleted = User.deleteOneById(userId);
+
+  if (!isDeleted) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  res.json({ message: "Deleted successfully" });
+};
+
+
 module.exports = {
   getAllUsers,
   createUser,
