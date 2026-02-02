@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 
 const getAllUsers = (req, res) => {
    res.json(User.getAll());
-};
+}
 
 const createUser = (req, res) => {
    const {
@@ -24,14 +24,14 @@ const createUser = (req, res) => {
       gender,
       date_of_birth,
       membership_status
-   );
+   )
 
    if (!newUser) {
       return res.status(500).json({ message: 'Fail to create user' });
    }
 
-   res.json(newUser);
-};
+   res.json(newUser)
+}
 
 const getUserById = (req, res) => {
    const { userId } = req.params;
@@ -42,7 +42,7 @@ const getUserById = (req, res) => {
    }
 
    res.json(user);
-};
+}
 
 const updateUser = (req, res) => {
    const { userId } = req.params;
@@ -53,7 +53,7 @@ const updateUser = (req, res) => {
    }
 
    res.json(updatedUser);
-};
+}
 
 const deleteUser = (req, res) => {
   const { userId } = req.params;
@@ -64,7 +64,7 @@ const deleteUser = (req, res) => {
   }
 
   res.json({ message: "Deleted successfully" });
-};
+}
 
 
 module.exports = {
@@ -72,5 +72,5 @@ module.exports = {
   createUser,
   getUserById,
   updateUser,
-  deleteUser,
-};
+  deleteUser
+}
