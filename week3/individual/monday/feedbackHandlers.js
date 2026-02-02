@@ -1,25 +1,15 @@
 const Feedback = require("./feedbackLib");
 
 const getAllFeedbacks = (req, res) => {
-    res.json(Feedback.getAll());
+    res.json({ message: "Hello from getAllFeedbacks" });
 };
 
 const createFeedback = (req, res) => {
-    const {sender, message, rating, platfrom} = req.body
-    const newFeedback = Feedback.addOne(sender, message, rating, platfrom)
-    if (!newFeedback) {
-        return res.status(500).json({ message: "Fail to create tour" });
-    }
-    return res.status(201).json(newFeedback)
+    res.json({ message: "Hello from createFeedback" });
 };
 
 const getFeedbackById = (req, res) => {
-    const {id} = req.params
-    const feedback = Feedback.getById(id)
-
-    if (!feedback) {
-        return res.status(404).json({message: "Feedback not found"})
-    }
+    res.json({ message: "Hello from getFeedbackById" });
 };
 
 const updateFeedback = (req, res) => {

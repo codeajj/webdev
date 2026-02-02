@@ -15,19 +15,19 @@ app.use(express.json());
 // ROUTES
 
 // GET /feedback
-app.get("/", getAllFeedbacks);
+app.get("/feedback", getAllFeedbacks);
 
 // POST /feedback
-app.post("/", createFeedback);
+app.post("/feedback", createFeedback);
 
 // GET /feedback/:feedbackId
-app.get("/:feedbackId", getFeedbackById);
+app.get("/feedback/:feedbackId", getFeedbackById);
 
 // PUT /feedback/:feedbackId
-app.put("/:feedbackId", updateFeedback);
+app.put("/feedback/:feedbackId", updateFeedback);
 
 // DELETE /feedback/:feedbackId
-app.delete("/:feedbackId", deleteFeedback);
+app.delete("/feedback/:feedbackId", deleteFeedback);
 
 const port = 4000;
 // Start the server
