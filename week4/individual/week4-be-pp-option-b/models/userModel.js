@@ -17,7 +17,7 @@ const addOne = (
     if (!name || !email || !password || !phone_number || !gender || !date_of_birth || !membership_status) {
       return false
     }
-    
+
     const newUser = {
       id: nextId++,
       name,
@@ -33,5 +33,9 @@ const addOne = (
    return newUser;
 }
 
+const findById = (id) => {
+   const user = userArray.find((u) => u.id === Number(id));
+   return user || false;
+};
 
 module.exports = {}
