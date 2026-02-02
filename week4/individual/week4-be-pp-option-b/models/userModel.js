@@ -53,4 +53,21 @@ const updateOneById = (id, updatedData) => {
    return user;
 };
 
+const deleteOneById = (id) => {
+   const existing = findById(id);
+   if (!existing) return false;
+
+   const initialLength = userArray.length;
+   userArray = userArray.filter((u) => u.id !== Number(id));
+   return userArray.length < initialLength;
+};
+
+module.exports = {
+   getAll,
+   addOne,
+   findById,
+   updateOneById,
+   deleteOneById,
+};
+
 module.exports = {}
